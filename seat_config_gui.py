@@ -262,13 +262,14 @@ class SeatConfiguratorApp(tk.Tk):
             return
 
         try:
-            time_txt = self.time_var.get()
-            if time_txt.strip() != "":
-                flight_time = parse_hms_to_hours(time_txt)
-                if flight_time <= 0:
-                    raise ValueError
+            h = self.hour_var.get()
+            m = self.min_var.get()
+            s = self.sec_var.get()
+            flight_time = h + m / 60 + s / 3600
+            if flight_time <= 0:
+                raise ValueError
         except Exception:
-            messagebox.showerror("Error", "Flight time must be HH, HH:MM or HH:MM:SS (positive).")
+            messagebox.showerror("Error", "Flight time must be a valid positive number.")
             return
 
         # Solve seats
