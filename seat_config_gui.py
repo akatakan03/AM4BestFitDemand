@@ -155,9 +155,18 @@ class SeatConfiguratorApp(tk.Tk):
         opt.grid(row=row, column=0, columnspan=2, pady=8, sticky="we")
         opt.columnconfigure(1, weight=1)
 
-        ttk.Label(opt, text="Flight time (HH[:MM[:SS]], one-way):").grid(row=0, column=0, sticky="w")
-        self.time_var = tk.StringVar(value="")
-        ttk.Entry(opt, textvariable=self.time_var, width=12).grid(row=0, column=1, sticky="w")
+        ttk.Label(opt, text="Flight time (HH:MM:SS):").grid(row=0, column=0, sticky="w")
+
+        time_frame = ttk.Frame(opt)
+        time_frame.grid(row=0, column=1, sticky="w")
+        self.hour_var = tk.IntVar(value=0)
+        self.min_var = tk.IntVar(value=0)
+        self.sec_var = tk.IntVar(value=0)
+        tk.Spinbox(time_frame, from_=0, to=23, textvariable=self.hour_var, width=3).grid(row=0, column=0)
+        tk.Label(time_frame, text=":").grid(row=0, column=1)
+        tk.Spinbox(time_frame, from_=0, to=59, textvariable=self.min_var, width=3).grid(row=0, column=2)
+        tk.Label(time_frame, text=":").grid(row=0, column=3)
+        tk.Spinbox(time_frame, from_=0, to=59, textvariable=self.sec_var, width=3).grid(row=0, column=4)
 
         ttk.Label(opt, text="Reputation (%) [1–99]:").grid(row=1, column=0, sticky="w")
         self.rep_var = tk.StringVar(value="")
